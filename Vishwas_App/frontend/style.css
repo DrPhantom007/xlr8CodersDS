@@ -1,0 +1,77 @@
+/* Basic page styling */
+body {
+  font-family: Arial, sans-serif;
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 0 15px;
+  background-color: #f9f9f9;
+}
+
+/* Form title */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Style for fieldsets to create boxes */
+fieldset {
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  padding: 20px 25px;
+  margin-bottom: 25px;
+  background-color: #fff;
+}
+
+/* Fieldset legend styling */
+legend {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 0 10px;
+}
+
+/* Label styling */
+label {
+  font-weight: 600;
+}
+
+/* Input, textarea full width with spacing */
+input[type="text"],
+input[type="tel"],
+input[type="number"],
+input[type="date"],
+textarea {
+  width: 100%;
+  padding: 8px 10px;
+  margin-top: 6px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+/* Button styling */
+button {
+  background-color: #4caf50;
+  color: white;
+  font-size: 1.1em;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto 30px auto;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Response message styling */
+#response {
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  min-height: 20px;
+}

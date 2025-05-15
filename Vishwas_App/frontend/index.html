@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vishwas App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #004080;
+      margin: 20px;
+    }
+    .nav-buttons {
+      margin-bottom: 20px;
+    }
+    .nav-buttons button {
+      background: #007bff;
+      border: none;
+      color: white;
+      padding: 10px 25px;
+      margin-right: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    .nav-buttons button.active {
+      background: #0056b3;
+    }
+    .box {
+      border: 2px solid #007bff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    fieldset.box legend {
+      font-weight: bold;
+      color: #004080;
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #007bff;
+      border-radius: 4px;
+    }
+    button[type="submit"] {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button[type="submit"]:hover {
+      background: #0056b3;
+    }
+    #responseMessage {
+      color: green;
+      font-weight: bold;
+    }
+    #languageSelector {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1 id="pageTitle" data-i18n="home">Home</h1>
+
+<select id="languageSelector">
+  <option value="en">English</option>
+  <option value="hi">हिंदी</option>
+  <option value="kn">ಕನ್ನಡ</option>
+</select>
+
+<div class="nav-buttons">
+  <button id="btnHome" class="active" data-i18n="home">Home</button>
+  <button id="btnBorrower" data-i18n="borrower">Borrower</button>
+  <button id="btnInvestor" data-i18n="investor">Investor</button>
+</div>
+
+<div id="homeSection">
+  <p data-i18n="welcomeMessage">Welcome to Vishwas App! A trusted platform to apply for loans and invest for high returns.</p>
+</div>
+
+<div id="borrowerSection" style="display:none;">
+  <h2 data-i18n="loanFormTitle">Loan Application Form - Borrower</h2>
+  <form id="borrowerForm">
+    <fieldset class="box">
+      <legend data-i18n="personalDetails">Personal Details</legend>
+      <label for="fullName" data-i18n="fullName">Full Name *</label>
+      <input type="text" id="fullName" name="fullName" required />
+
+      <label for="phoneNumber" data-i18n="phoneNumber">Phone Number *</label>
+      <input type="tel" id="phoneNumber" name="phoneNumber" required />
+
+      <label for="aadharNumber" data-i18n="aadharNumber">Aadhar Number *</label>
+      <input type="text" id="aadharNumber" name="aadharNumber" required />
+
+      <label for="panNumber" data-i18n="panNumber">PAN Number (Optional)</label>
+      <input type="text" id="panNumber" name="panNumber" />
+    </fieldset>
+
+    <fieldset class="box">
+      <legend data-i18n="loanDetails">Loan Details</legend>
+      <label for="monthlyIncome" data-i18n="monthlyIncome">Monthly Income *</label>
+      <input type="number" id="monthlyIncome" name="monthlyIncome" required />
+
+      <label for="loanPurpose" data-i18n="loanPurpose">Loan Purpose *</label>
+      <select id="loanPurpose" name="loanPurpose" required>
+        <option value="" disabled selected data-i18n="selectPurpose">Select purpose</option>
+        <option value="small_business" data-i18n="smallBusiness">Small Business</option>
+        <option value="education" data-i18n="education">Education</option>
+        <option value="emergency_expenses" data-i18n="emergencyExpenses">Emergency Expenses</option>
+        <option value="housing" data-i18n="housing">Housing</option>
+        <option value="others" data-i18n="others">Others</option>
+      </select>
+
+      <label for="loanAmount" data-i18n="loanAmount">Loan Amount *</label>
+      <input type="number" id="loanAmount" name="loanAmount" required />
+
+      <label for="loanDuration" data-i18n="loanDuration">Loan Duration *</label>
+      <select id="loanDuration" name="loanDuration" required>
+        <option value="" disabled selected data-i18n="selectDuration">Select duration</option>
+        <option value="3" data-i18n="3months">3 Months - 12% interest</option>
+        <option value="6" data-i18n="6months">6 Months - 18% interest</option>
+        <option value="12" data-i18n="12months">12 Months - 24% interest</option>
+      </select>
+    </fieldset>
+
+    <fieldset class="box">
+      <label>
+        <input type="checkbox" id="agreeTerms" required />
+        <span data-i18n="agreeTerms">I agree to the <a href="#">terms and conditions</a>.</span>
+      </label>
+    </fieldset>
+
+    <button type="submit" data-i18n="submitApplication">Submit Application</button>
+  </form>
+  <div id="borrowerResponseMessage"></div>
+</div>
+
+<div id="investorSection" style="display:none;">
+  <h2 data-i18n="investorFormTitle">Investor Form</h2>
+  <form id="investorForm">
+    <fieldset class="box">
+      <legend data-i18n="investorDetails">Investor Details</legend>
+      <label for="investorName" data-i18n="fullName">Full Name *</label>
+      <input type="text" id="investorName" name="investorName" required />
+
+      <label for="investorPhone" data-i18n="phoneNumber">Phone Number *</label>
+      <input type="tel" id="investorPhone" name="investorPhone" required />
+    </fieldset>
+
+    <fieldset class="box">
+      <legend data-i18n="investmentDetails">Investment Details</legend>
+      <label for="investmentAmount" data-i18n="investmentAmount">Investment Amount *</label>
+      <input type="number" id="investmentAmount" name="investmentAmount" required />
+
+      <p data-i18n="returns">Get up to <strong>24% returns per annum</strong>!</p>
+    </fieldset>
+
+    <button type="submit" data-i18n="submitInvestment">Submit Investment</button>
+  </form>
+  <div id="investorResponseMessage"></div>
+</div>
+
+<script>
+const i18n = {
+  en: {
+    home: "Home",
+    welcomeMessage: "Welcome to Vishwas! A trusted platform to apply for loans and invest for high returns.",
+    borrower: "Borrower",
+    investor: "Investor",
+    loanFormTitle: "Loan Application Form - Borrower",
+    personalDetails: "Personal Details",
+    fullName: "Full Name *",
+    phoneNumber: "Phone Number *",
+    aadharNumber: "Aadhar Number *",
+    panNumber: "PAN Number *",
+    loanDetails: "Loan Details",
+    monthlyIncome: "Monthly Income *",
+    loanPurpose: "Loan Purpose *",
+    selectPurpose: "Select purpose",
+    smallBusiness: "Small Business",
+    education: "Education",
+    emergencyExpenses: "Emergency Expenses",
+    housing: "Housing",
+    others: "Others",
+    loanAmount: "Loan Amount *",
+    loanDuration: "Loan Duration *",
+    selectDuration: "Select duration",
+    "3months": "3 Months - 24% interest",
+    "6months": "6 Months - 18% interest",
+    "12months": "12 Months - 12% interest",
+    agreeTerms: "I agree to the <a href='#'>terms and conditions</a>.",
+    submitApplication: "Submit Application",
+    investorFormTitle: "Investor Form",
+    investorDetails: "Investor Details",
+    investmentDetails: "Investment Details",
+    investmentAmount: "Investment Amount *",
+    returns: "Get up to <strong>24% returns per annum</strong>!",
+    submitInvestment: "Submit Investment"
+  },
+  hi: {
+    home: "होम",
+    welcomeMessage: "Vishwas में आपका स्वागत है! ऋण के लिए आवेदन करें और उच्च रिटर्न के लिए निवेश करें।",
+    borrower: "उधारकर्ता",
+    investor: "निवेशक",
+    loanFormTitle: "ऋण आवेदन फॉर्म - उधारकर्ता",
+    personalDetails: "व्यक्तिगत जानकारी",
+    fullName: "पूरा नाम *",
+    phoneNumber: "फोन नंबर *",
+    aadharNumber: "आधार नंबर *",
+    panNumber: "पैन नंबर *",
+    loanDetails: "ऋण विवरण",
+    monthlyIncome: "मासिक आय *",
+    loanPurpose: "ऋण का उद्देश्य *",
+    selectPurpose: "उद्देश्य चुनें",
+    smallBusiness: "छोटा व्यवसाय",
+    education: "शिक्षा",
+    emergencyExpenses: "आपातकालीन खर्चे",
+    housing: "आवास",
+    others: "अन्य",
+    loanAmount: "ऋण राशि *",
+    loanDuration: "ऋण अवधि *",
+    selectDuration: "अवधि चुनें",
+    "3months": "3 महीने - 24% ब्याज",
+    "6months": "6 महीने - 18% ब्याज",
+    "12months": "12 महीने - 12% ब्याज",
+    agreeTerms: "मैं <a href='#'>नियमों और शर्तों</a> से सहमत हूं।",
+    submitApplication: "आवेदन सबमिट करें",
+    investorFormTitle: "निवेशक फॉर्म",
+    investorDetails: "निवेशक विवरण",
+    investmentDetails: "निवेश विवरण",
+    investmentAmount: "निवेश राशि *",
+    returns: "प्रति वर्ष <strong>24%</strong> तक रिटर्न प्राप्त करें!",
+    submitInvestment: "निवेश सबमिट करें"
+  },
+  kn: {
+    home: "ಮುಖಪುಟ",
+    welcomeMessage: "Vishwas ಗೆ ಸುಸ್ವಾಗತ! ಸಾಲಕ್ಕೆ ಅರ್ಜಿ ಹಾಕಿ ಮತ್ತು ಹೆಚ್ಚು ಪ್ರತಿಫಲಕ್ಕಾಗಿ ಹೂಡಿಕೆ ಮಾಡಿ.",
+    borrower: "ಸಾಲಗಾರ",
+    investor: "ಹೂಡಿಕೆದಾರ",
+    loanFormTitle: "ಸಾಲ ಅರ್ಜಿ ಫಾರ್ಮ್ - ಸಾಲಗಾರ",
+    personalDetails: "ವೈಯಕ್ತಿಕ ವಿವರಗಳು",
+    fullName: "ಪೂರ್ಣ ಹೆಸರು *",
+    phoneNumber: "ದೂರವಾಣಿ ಸಂಖ್ಯೆ *",
+    aadharNumber: "ಆಧಾರ್ ಸಂಖ್ಯೆ *",
+    panNumber: "ಪ್ಯಾನ್ ಸಂಖ್ಯೆ *",
+    loanDetails: "ಸಾಲದ ವಿವರಗಳು",
+    monthlyIncome: "ಮಾಸಿಕ ಆದಾಯ *",
+    loanPurpose: "ಸಾಲ ಉದ್ದೇಶ *",
+    selectPurpose: "ಉದ್ದೇಶವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    smallBusiness: "ಸಣ್ಣ ವ್ಯಾಪಾರ",
+    education: "ಶಿಕ್ಷಣ",
+    emergencyExpenses: "ತುರ್ತು ವೆಚ್ಚಗಳು",
+    housing: "ವಸತಿ",
+    others: "ಇತರೆ",
+    loanAmount: "ಸಾಲದ ಮೊತ್ತ *",
+    loanDuration: "ಸಾಲ ಅವಧಿ *",
+    selectDuration: "ಅವಧಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    "3months": "3 ತಿಂಗಳು - 24% ಬಡ್ಡಿ",
+    "6months": "6 ತಿಂಗಳು - 18% ಬಡ್ಡಿ",
+    "12months": "12 ತಿಂಗಳು - 12% ಬಡ್ಡಿ",
+    agreeTerms: "ನಾನು <a href='#'>ನಿಯಮಗಳು ಮತ್ತು ಷರತ್ತುಗಳನ್ನು</a> ಒಪ್ಪುತ್ತೇನೆ.",
+    submitApplication: "ಅರ್ಜಿ ಸಲ್ಲಿಸಿ",
+    investorFormTitle: "ಹೂಡಿಕೆದಾರ ಫಾರ್ಮ್",
+    investorDetails: "ಹೂಡಿಕೆದಾರ ವಿವರಗಳು",
+    investmentDetails: "ಹೂಡಿಕೆ ವಿವರಗಳು",
+    investmentAmount: "ಹೂಡಿಕೆಯ ಮೊತ್ತ *",
+    returns: "<strong>24%</strong> ವಾರ್ಷಿಕ ಪ್ರತಿಫಲ ಪಡೆಯಿರಿ!",
+    submitInvestment: "ಹೂಡಿಕೆ ಸಲ್ಲಿಸಿ"
+  }
+};
+
+function translateUI(lang) {
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (i18n[lang][key]) {
+      el.innerHTML = i18n[lang][key];
+    }
+  });
+  document.getElementById("pageTitle").innerText = i18n[lang][document.querySelector(".nav-buttons button.active").getAttribute("data-i18n")];
+}
+
+document.getElementById("languageSelector").addEventListener("change", function () {
+  translateUI(this.value);
+});
+
+document.getElementById("btnHome").addEventListener("click", () => showSection("home"));
+document.getElementById("btnBorrower").addEventListener("click", () => showSection("borrower"));
+document.getElementById("btnInvestor").addEventListener("click", () => showSection("investor"));
+
+function showSection(section) {
+  document.getElementById("homeSection").style.display = section === "home" ? "block" : "none";
+  document.getElementById("borrowerSection").style.display = section === "borrower" ? "block" : "none";
+  document.getElementById("investorSection").style.display = section === "investor" ? "block" : "none";
+
+  document.querySelectorAll(".nav-buttons button").forEach(btn => btn.classList.remove("active"));
+  document.getElementById("btn" + section.charAt(0).toUpperCase() + section.slice(1)).classList.add("active");
+
+  const lang = document.getElementById("languageSelector").value;
+  translateUI(lang);
+}
+// Borrower form submission popup
+document.getElementById("borrowerForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // Prevent actual form submission
+  alert("Your loan application has been submitted successfully!");
+  this.reset(); // Optional: clear the form after submission
+});
+
+// Investor form submission popup
+document.getElementById("investorForm").addEventListener("submit", function (e) {
+  e.preventDefault(); // Prevent actual form submission
+  alert("Your investment has been submitted successfully!");
+  this.reset(); // Optional: clear the form after submission
+});
+
+</script>
+
+</body>
+</html>
